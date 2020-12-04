@@ -1,0 +1,6 @@
+.phpunit.result.cache
+
+coverage
+coverage.xml
+composer.lock
+vendor
