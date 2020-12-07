@@ -3,9 +3,8 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="ByTIC\Namefy\" />
-      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/tests/fixtures" isTestSource="true" packagePrefix="ByTIC\Namifier\Tests\Fixtures\" />
-      <sourceFolder url="file://$MODULE_DIR$/tests/src" isTestSource="true" packagePrefix="ByTIC\Namifier\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/fixtures" isTestSource="true" packagePrefix="ByTIC\Namefy\Tests\Fixtures\" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/src" isTestSource="true" packagePrefix="ByTIC\Namefy\Tests" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-invoker" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-text-template" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-timer" />

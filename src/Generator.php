@@ -28,7 +28,7 @@ class Generator
      * @param $type
      * @return Name
      */
-    public function from($name, $type)
+    public function from($name, $type): Name
     {
         return NameFactory::from($name, $type, $this->getStrategy());
     }

@@ -63,6 +63,9 @@ class Name
         $this->controller = $controller;
     }
 
+    /**
+     * @param string $name
+     */
     protected function checkProperty($name)
     {
         if (isset($this->{$name}) && $this->{$name} instanceof \Closure) {
