@@ -16,8 +16,8 @@ class NameFactoryTest extends AbstractTest
     {
         $strategy = \Mockery::mock(AbstractStrategy::class)->makePartial();
         $strategy->shouldReceive('fromModel')->andReturn('resource');
-        $strategy->shouldReceive('toModel')->andReturn('model');
-        $strategy->shouldReceive('toController')->andReturn('controller');
+        $strategy->shouldReceive('toModel')->with('resource')->andReturn('model');
+        $strategy->shouldReceive('toController')->with('resource')->andReturn('controller');
 
         $name = NameFactory::from('books', 'model', $strategy);
 

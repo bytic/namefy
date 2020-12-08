@@ -23,7 +23,7 @@ class NameFactory
         };
         $name = static::newName($resource);
 
-        static::addCallbacks($name, $resource, $strategy);
+        static::addCallbacks($name, $strategy);
 
         return $name;
     }
@@ -41,20 +41,19 @@ class NameFactory
 
     /**
      * @param Name $name
-     * @param $resource
      * @param $strategy
      */
-    protected static function addCallbacks(Name &$name, $resource, $strategy)
+    protected static function addCallbacks(Name &$name, $strategy)
     {
         $name->setModel(
-            function () use ($resource, $strategy) {
-                return $strategy->to('model', $resource);
+            function () use ($name, $strategy) {
+                return $strategy->to('model', $name->resource());
             }
         );
 
         $name->setController(
-            function () use ($resource, $strategy) {
-                return $strategy->to('controller', $resource);
+            function () use ($name, $strategy) {
+                return $strategy->to('controller', $name->resource());
             }
         );
     }

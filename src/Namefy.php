@@ -22,27 +22,30 @@ class Namefy
 
     /**
      * @param string $name
+     * @return Name
      */
-    public static function model($name)
+    public static function model($name): Name
     {
-        static::from($name, 'model');
+        return static::from($name, 'model');
     }
 
     /**
      * @param string $name
+     * @return Name
      */
-    public static function controller($name)
+    public static function controller($name): Name
     {
-        static::from($name, 'controller');
+        return static::from($name, 'controller');
     }
 
     /**
      * @param string $name
      * @param string $type
+     * @return Name
      */
-    protected static function from($name, $type)
+    protected static function from(string $name, $type): Name
     {
-        static::self()->from($name, $type);
+        return static::self()->from($name, $type);
     }
 
     protected static function self(): Generator
