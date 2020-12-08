@@ -11,5 +11,4 @@ use Mockery as m;
 abstract class AbstractTest extends TestCase
 {
     use m\Adapter\Phpunit\MockeryPHPUnitIntegration;
-
 }

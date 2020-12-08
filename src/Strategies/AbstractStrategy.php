@@ -15,7 +15,7 @@ abstract class AbstractStrategy
      */
     public function from($type, $value)
     {
-        $method = 'from'.ucfirst($type);
+        $method = 'from' . ucfirst($type);
         return $this->$method($value);
     }
 
@@ -38,7 +38,7 @@ abstract class AbstractStrategy
      */
     public function to($type, $value)
     {
-        $method = 'to'.ucfirst($type);
+        $method = 'to' . ucfirst($type);
         return $this->$method($value);
     }
 
