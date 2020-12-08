@@ -43,7 +43,7 @@ trait HasStrategy
     protected function newStrategy($class): AbstractStrategy
     {
         if (!class_exists($class)) {
-            $class = '\\'.dirname(AbstractStrategy::class) . $class . 'Strategy';
+            $class = '\\' . dirname(AbstractStrategy::class) . $class . 'Strategy';
         }
         return new $class();
     }
