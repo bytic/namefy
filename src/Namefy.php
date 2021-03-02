@@ -33,6 +33,15 @@ class Namefy
      * @param string $name
      * @return Name
      */
+    public static function repository($name): Name
+    {
+        return static::from($name, 'repository');
+    }
+
+    /**
+     * @param string $name
+     * @return Name
+     */
     public static function controller($name): Name
     {
         return static::from($name, 'controller');

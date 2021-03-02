@@ -5,6 +5,7 @@ namespace ByTIC\Namefy\Tests;
 use ByTIC\Namefy\Name;
 use ByTIC\Namefy\NameFactory;
 use ByTIC\Namefy\Strategies\AbstractStrategy;
+use Mockery\Mock;
 
 /**
  * Class NameFactoryTest
@@ -14,12 +15,13 @@ class NameFactoryTest extends AbstractTest
 {
     public function test_from()
     {
+        /** @var Mock|AbstractStrategy $strategy */
         $strategy = \Mockery::mock(AbstractStrategy::class)->makePartial();
-        $strategy->shouldReceive('fromModel')->andReturn('resource');
-        $strategy->shouldReceive('toModel')->with('resource')->andReturn('model');
-        $strategy->shouldReceive('toController')->with('resource')->andReturn('controller');
+        $strategy->shouldReceive('fromRepository')->andReturn('resource');
+        $strategy->shouldReceive('toModel')->andReturn('model');
+        $strategy->shouldReceive('toController')->andReturn('controller');
 
-        $name = NameFactory::from('books', 'model', $strategy);
+        $name = NameFactory::from('books', 'repository', $strategy);
 
         self::assertInstanceOf(Name::class, $name);
 

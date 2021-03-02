@@ -11,17 +11,19 @@ use ByTIC\Namefy\Strategies\AbstractStrategy;
 class NameFactory
 {
     /**
-     * @param $name
+     * @param $slug
      * @param $type
      * @param AbstractStrategy $strategy
      * @return Name
      */
-    public static function from($name, $type, AbstractStrategy $strategy): Name
+    public static function from($slug, $type, AbstractStrategy $strategy): Name
     {
-        $resource = function () use ($name, $type, $strategy) {
-            return $strategy->from($type, $name);
+        $name = new Name();
+
+        $resource = function () use ($slug, $type, $strategy, $name) {
+            return $strategy->from($type, $slug, $name);
         };
-        $name = static::newName($resource);
+        $name->setResource($resource);
 
         static::addCallbacks($name, $strategy);
 
@@ -47,13 +49,13 @@ class NameFactory
     {
         $name->setModel(
             function () use ($name, $strategy) {
-                return $strategy->to('model', $name->resource());
+                return $strategy->to('model', $name);
             }
         );
 
         $name->setController(
             function () use ($name, $strategy) {
-                return $strategy->to('controller', $name->resource());
+                return $strategy->to('controller', $name);
             }
         );
     }

@@ -2,6 +2,8 @@
 
 namespace ByTIC\Namefy\Strategies;
 
+use ByTIC\Namefy\Name;
+
 /**
  * Class ByTICStrategy
  * @package ByTIC\Namefy\Strategies
@@ -9,33 +11,70 @@ namespace ByTIC\Namefy\Strategies;
 class ByTICStrategy extends AbstractStrategy
 {
     /**
-     * @inheritDoc
+     * @param $slug
+     * @param Name $name
+     * @return string
      */
-    public function fromModel($name): string
+    public function fromRepository($slug, Name $name)
     {
-        if (strpos($name, '\\') !== false) {
-            $name = trim($name, '\\');
-            $parts = explode('\\', $name);
-            array_pop($parts);
+        $slug = $this->cleanModelNamespace($slug);
 
-            $name = implode('\\', $parts);
-        }
-
-        return inflector()->unclassify($name);
+        return inflector()->unclassify($slug);
     }
 
-    public function fromController($name)
+    /**
+     * @inheritDoc
+     */
+    public function fromModel($slug, Name $name): string
+    {
+        $slug = $this->cleanModelNamespace($slug);
+        $slug = inflector()->unclassify($slug);
+        return inflector()->pluralize($slug);
+    }
+
+    public function fromController($slug, Name $name)
     {
         // TODO: Implement fromController() method.
     }
 
-    public function toModel($resourceName): string
+    /**
+     * @inheritDoc
+     */
+    public function toRepository(Name $name): string
     {
-        return $resourceName;
+        // TODO: Implement toRepository() method.
     }
 
-    public function toController($resourceName): string
+    /**
+     * @inheritDoc
+     */
+    public function toModel(Name $name): string
     {
-        return $resourceName;
+        return $name;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toController(Name $name): string
+    {
+        return $name->resource();
+    }
+
+    protected function cleanModelNamespace($name): string
+    {
+        if (strpos($name, '\\') === false) {
+            return $name;
+        }
+        if (method_exists($name, 'getRootNamespace')) {
+            $name = str_replace((new $name())->getRootNamespace(), '', $name);
+        }
+
+        $name = trim($name, '\\');
+        $parts = explode('\\', $name);
+        array_pop($parts);
+
+        $name = implode('\\', $parts);
+        return $name;
     }
 }

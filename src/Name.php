@@ -9,6 +9,7 @@ namespace ByTIC\Namefy;
 class Name
 {
     protected $resource;
+    protected $repository;
     protected $model;
     protected $controller;
 
@@ -27,6 +28,23 @@ class Name
     public function setResource($resource): void
     {
         $this->resource = $resource;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function repository()
+    {
+        $this->checkProperty('repository');
+        return $this->repository;
+    }
+
+    /**
+     * @param mixed $repository
+     */
+    public function setRepository($repository): void
+    {
+        $this->repository = $repository;
     }
 
     /**

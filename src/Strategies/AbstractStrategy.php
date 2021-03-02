@@ -2,6 +2,8 @@
 
 namespace ByTIC\Namefy\Strategies;
 
+use ByTIC\Namefy\Name;
+
 /**
  * Class AbstractStrategy
  * @package ByTIC\Namefy\Strategies
@@ -11,25 +13,32 @@ abstract class AbstractStrategy
     /**
      * @param $type
      * @param $value
+     * @param Name $name
      * @return mixed
      */
-    public function from($type, $value)
+    public function from($type, $value, Name $name)
     {
         $method = 'from' . ucfirst($type);
-        return $this->$method($value);
+        return $this->$method($value, $name);
     }
 
     /**
-     * @param $name
+     * @param $slug
      * @return string
      */
-    abstract public function fromModel($name);
+    abstract public function fromRepository($slug, Name $name);
 
     /**
-     * @param $name
+     * @param $slug
      * @return string
      */
-    abstract public function fromController($name);
+    abstract public function fromModel($slug, Name $name);
+
+    /**
+     * @param $slug
+     * @return string
+     */
+    abstract public function fromController($slug, Name $name);
 
     /**
      * @param $type
@@ -43,14 +52,20 @@ abstract class AbstractStrategy
     }
 
     /**
-     * @param $resourceName
+     * @param Name $name
      * @return string
      */
-    abstract public function toModel($resourceName);
+    abstract public function toModel(Name $name);
 
     /**
-     * @param $name
+     * @param Name $name
      * @return string
      */
-    abstract public function toController($name);
+    abstract public function toController(Name $name);
+
+    /**
+     * @param Name $name
+     * @return string
+     */
+    abstract public function toRepository(Name $name);
 }
